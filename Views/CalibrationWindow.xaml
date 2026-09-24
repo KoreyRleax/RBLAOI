@@ -1,0 +1,125 @@
+<Window x:Class="RBLAOI.Views.CalibrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:RBLAOI.Core.Controls"
+        Title="标定助手" Height="520" Width="580"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="{DynamicResource ThemeBg}"
+        Foreground="{DynamicResource ThemeText}">
+
+    <Border Background="{DynamicResource ThemeBg}" BorderBrush="{DynamicResource ThemeBorder}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <controls:TitleBarControl Grid.Row="0" Title="标定助手" TitleIcon="🔧"/>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="15">
+
+                    <!-- 使用说明 -->
+                    <Border Background="{DynamicResource ThemePanelBg}" BorderBrush="{DynamicResource ThemeBorder}" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="📖 使用说明" FontSize="14" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="1. 点击下方「置零」按钮，将拼图X/Y补偿临时设为 0 并保存" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                            <TextBlock Text="2. 关闭此窗口，在主界面执行一次全图采集" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                            <TextBlock Text="3. 观察拼接图的拼缝处，找到特征（焊盘、通孔等）的错位" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                            <TextBlock Text="4. 数出像素偏移量（如某特征在两 tile 中相差 3 个像素）" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                            <TextBlock Text="5. 在下方输入测量值，点击「计算」自动得出补偿值" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                            <TextBlock Text="6. 点击「应用」将补偿值写入系统参数" FontSize="12" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Step 1: 置零 -->
+                    <Border Background="{DynamicResource ThemePanelBg}" BorderBrush="{DynamicResource ThemeBorder}" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="Step 1：置零补偿值" FontSize="14" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="将拼图X/Y补偿临时设为 0，保存后执行全图采集" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                            <Button x:Name="btnZero" Content="置零并保存" Style="{StaticResource CommonRadiusButtonStyle}"
+                                    HorizontalAlignment="Left" Width="140" Height="30" Click="BtnZero_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Step 2: 计算X补偿 -->
+                    <Border Background="{DynamicResource ThemePanelBg}" BorderBrush="{DynamicResource ThemeBorder}" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="Step 2：计算拼图X补偿（行间偏移引起 Y 方向错位）" FontSize="14" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="在拼接图上找一行拼缝（如 row=0 与 row=1 之间），记录以下值：" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="行差（eg. 1~3）：" FontSize="13" VerticalAlignment="Center" Margin="0,4,8,4"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtRowDiff" Text="1" Width="80" HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="测得像素偏移：" FontSize="13" VerticalAlignment="Center" Margin="0,4,8,4"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtPxX" Text="0" Width="80" HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="像素当量：" FontSize="13" VerticalAlignment="Center" Margin="0,4,8,4"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtPixelEqX" IsReadOnly="True" Width="80" HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center"/>
+                                <Button Grid.Row="0" Grid.Column="2" x:Name="btnCalcX" Content="计算X补偿" Style="{StaticResource CommonRadiusButtonStyle}"
+                                        Margin="8,4,0,4" Height="28" Click="BtnCalcX_Click"/>
+                            </Grid>
+                            <TextBlock x:Name="txtResultX" FontSize="14" FontWeight="SemiBold" Foreground="#FF409C72" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Step 3: 计算Y补偿 -->
+                    <Border Background="{DynamicResource ThemePanelBg}" BorderBrush="{DynamicResource ThemeBorder}" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="Step 3：计算拼图Y补偿（列间偏移引起 X 方向错位）" FontSize="14" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="在拼接图上找一列拼缝（如 col=0 与 col=1 之间），记录以下值：" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="列差（eg. 1~3）：" FontSize="13" VerticalAlignment="Center" Margin="0,4,8,4"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtColDiff" Text="1" Width="80" HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="测得像素偏移：" FontSize="13" VerticalAlignment="Center" Margin="0,4,8,4"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtPxY" Text="0" Width="80" HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="像素当量：" FontSize="13" VerticalAlignment="Center" Margin="0,4,8,4"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtPixelEqY" IsReadOnly="True" Width="80" HorizontalAlignment="Left" FontSize="13" VerticalContentAlignment="Center"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="计算Y补偿" Style="{StaticResource CommonRadiusButtonStyle}"
+                                        Margin="8,4,0,4" Height="28" Click="BtnCalcY_Click"/>
+                            </Grid>
+                            <TextBlock x:Name="txtResultY" FontSize="14" FontWeight="SemiBold" Foreground="#FF409C72" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- 底部按钮 -->
+            <Border Grid.Row="2" Padding="15,10,15,10" Background="{DynamicResource ThemeBg}" BorderBrush="{DynamicResource ThemeBorder}" BorderThickness="0,1,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnApply" Content="应用全部" Style="{StaticResource CommonRadiusButtonStyle}" Width="100" Height="30" Margin="0,0,10,0" Click="BtnApply_Click"/>
+                    <Button Content="关闭" Style="{StaticResource CommonRadiusButtonStyle}" Width="80" Height="30" Click="BtnClose_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

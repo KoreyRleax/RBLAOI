@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="RBLAOI.Core.Controls.LabeledTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="root">
+
+    <UserControl.Resources>
+        <!-- 默认文本框宽度：约 8 个数字 -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource ThemeBg}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource ThemeText}"/>
+            <Setter Property="Width" Value="110"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeActive}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF5A5A5E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- 顶部标签模式（默认） -->
+        <StackPanel x:Name="TopPanel" Visibility="Visible">
+            <TextBlock x:Name="TopLabel"
+                       Text="{Binding LabelText, ElementName=root}"
+                       Foreground="{Binding LabelForeground, ElementName=root}"
+                       FontSize="12"
+                       Margin="0,0,0,4"
+                       HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding Text, ElementName=root, UpdateSourceTrigger=LostFocus}"
+                     BorderBrush="{Binding TextBoxBorderBrush, ElementName=root}"
+                     BorderThickness="{Binding TextBoxBorderThickness, ElementName=root}"
+                     FontWeight="{Binding TextBoxFontWeight, ElementName=root}"
+                     HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <!-- 左侧标签模式 -->
+        <Grid x:Name="LeftPanel" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       Text="{Binding LabelText, ElementName=root}"
+                       Foreground="{Binding LabelForeground, ElementName=root}"
+                       FontSize="12"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,0"/>
+            <TextBox Grid.Column="1"
+                     Text="{Binding Text, ElementName=root, UpdateSourceTrigger=LostFocus}"
+                     BorderBrush="{Binding TextBoxBorderBrush, ElementName=root}"
+                     BorderThickness="{Binding TextBoxBorderThickness, ElementName=root}"
+                     FontWeight="{Binding TextBoxFontWeight, ElementName=root}"
+                     VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>

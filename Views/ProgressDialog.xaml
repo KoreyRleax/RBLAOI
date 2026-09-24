@@ -1,0 +1,22 @@
+<Window x:Class="RBLAOI.Views.ProgressDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Width="420" Height="130"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ThemePanelBg}"
+        Foreground="{DynamicResource ThemeText}"
+        BorderBrush="{DynamicResource ThemeBorder}"
+        BorderThickness="1">
+    <Grid Margin="24,16">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock x:Name="txtProgress" FontSize="16" Margin="0,0,0,12"
+                       HorizontalAlignment="Center"/>
+            <ProgressBar x:Name="progressBar" Height="22"
+                         Minimum="0" Maximum="100"
+                         Foreground="{DynamicResource ThemeActive}"
+                         Background="{DynamicResource ThemeBorder}"/>
+        </StackPanel>
+    </Grid>
+</Window>

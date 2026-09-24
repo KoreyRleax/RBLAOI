@@ -1,0 +1,514 @@
+﻿<!-- CommonStyles.xaml -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ==================== 状态指示颜色 ==================== -->
+    <SolidColorBrush x:Key="StatusRunning" Color="#FF4ECDC4"/>
+    <SolidColorBrush x:Key="StatusIdle" Color="#FF95A5A6"/>
+    <SolidColorBrush x:Key="StatusAlarm" Color="#FFE74C3C"/>
+    <SolidColorBrush x:Key="StatusWarning" Color="#FFF39C12"/>
+    <SolidColorBrush x:Key="StatusSuccess" Color="#FF2ECC71"/>
+    <SolidColorBrush x:Key="StatusError" Color="#FFE74C3C"/>
+
+    <!-- ==================== 按钮颜色 ==================== -->
+    <SolidColorBrush x:Key="BtnPrimary" Color="#FF007ACC"/>
+    <SolidColorBrush x:Key="BtnSuccess" Color="#FF27AE60"/>
+    <SolidColorBrush x:Key="BtnWarning" Color="#FFE67E22"/>
+    <SolidColorBrush x:Key="BtnDanger" Color="#FFE74C3C"/>
+    <SolidColorBrush x:Key="BtnInfo" Color="#FF3498DB"/>
+
+    <SolidColorBrush x:Key="ButtonBg" Color="#FF3E3E42"/>
+    <SolidColorBrush x:Key="ButtonHover" Color="#FF505055"/>
+    <SolidColorBrush x:Key="ButtonSaveBg" Color="#FF2D6A4F"/>
+    <SolidColorBrush x:Key="ButtonSaveHover" Color="#FF409C72"/>
+    <SolidColorBrush x:Key="ButtonCancelBg" Color="#FF2D6A4F"/>
+    <SolidColorBrush x:Key="ButtonCancelHover" Color="#FF555559"/>
+
+    <!-- ==================== 文字颜色 ==================== -->
+    <SolidColorBrush x:Key="TextSuccess" Color="#FF27AE60"/>
+    <SolidColorBrush x:Key="TextWarning" Color="#FFE67E22"/>
+    <SolidColorBrush x:Key="TextError" Color="#FFE74C3C"/>
+    <SolidColorBrush x:Key="TextInfo" Color="#FF3498DB"/>
+    <SolidColorBrush x:Key="TextLink" Color="#FF007ACC"/>
+
+    <!-- ==================== 统一按钮颜色 ==================== -->
+    <Style x:Key="CommonRadiusButtonStyle" TargetType="Button">
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Background" Value="{DynamicResource ThemeButton}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== 刷新按钮样式 ==================== -->
+    <Style x:Key="RefreshButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorder}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ThemeHover}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeActive}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ThemeActive}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== 主菜单标题栏按钮样式 ==================== -->
+    <Style x:Key="TitleBarButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeTextSecondary}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ThemeHover}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ThemeBorder}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TitleBarCloseButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeTextSecondary}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="0">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFE81123"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFC50F1F"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== 主菜单按钮样式 ==================== -->
+    <Style x:Key="NavMenuButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ThemeSubText}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Padding" Value="24,12"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="0,0,0,2"
+                            BorderBrush="Transparent">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource ThemeActive}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NavMenuButtonActiveStyle" TargetType="Button" BasedOn="{StaticResource NavMenuButtonStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource ThemeActive}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="0,0,0,2"
+                            BorderBrush="{DynamicResource ThemeActive}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== 功能按钮样式 ==================== -->
+    <Style x:Key="ActionButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="Background" Value="{DynamicResource ThemePanelBg}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                        <Grid>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0">
+                                <TextBlock x:Name="IconText" 
+                                           Text="🔧" 
+                                           FontSize="26"
+                                           Foreground="{DynamicResource ThemeTextSecondary}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,6"/>
+                                <TextBlock x:Name="ContentText" 
+                                           Text="{TemplateBinding Content}"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           FontSize="11"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           MaxWidth="68"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ThemeHover}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeActive}"/>
+                            <Setter TargetName="IconText" Property="Foreground" Value="{DynamicResource ThemeActive}"/>
+                            <Setter TargetName="ContentText" Property="Foreground" Value="{DynamicResource ThemeActive}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ThemeActive}"/>
+                            <Setter TargetName="IconText" Property="Foreground" Value="White"/>
+                            <Setter TargetName="ContentText" Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                            <Setter Property="Cursor" Value="Arrow"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== 面板样式 ==================== -->
+    <Style x:Key="PanelStyle" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource ThemePanelBg}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorder}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Margin" Value="0,0,0,15"/>
+    </Style>
+
+
+
+    <!-- ==================== 分组框样式 ==================== -->
+    <Style x:Key="ThemedGroupBoxStyle" TargetType="GroupBox">
+        <Setter Property="Background" Value="{DynamicResource ThemePanelBg}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorder}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <!-- 标题 -->
+                            <Border Grid.Row="0" Background="Transparent" Margin="0,0,0,0" Padding="4,4">
+                                <ContentPresenter ContentSource="Header"
+                                                      TextElement.Foreground="{TemplateBinding Foreground}"
+                                                      TextElement.FontSize="15"
+                                                      TextElement.FontWeight="SemiBold"/>
+                            </Border>
+                            <!-- 内容 -->
+                            <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== 指示灯样式 ==================== -->
+    <Style x:Key="IndicatorStyle" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Margin" Value="0,6"/>
+    </Style>
+
+    <Style x:Key="IndicatorRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Width" Value="14"/>
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="RadiusX" Value="2"/>
+        <Setter Property="RadiusY" Value="2"/>
+    </Style>
+
+    <Style x:Key="IndicatorTextStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="8,0,0,0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeTextSecondary}"/>
+    </Style>
+
+    <!-- 下拉框样式 -->
+    <Style x:Key="ParamComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="Background" Value="{DynamicResource ThemeBg}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeActive}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="TemplateListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" 
+                        Padding="{TemplateBinding Padding}" CornerRadius="3">
+                        <ContentPresenter/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ThemeActive}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ThemeHover}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ThemedTabControlStyle" TargetType="TabControl">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+
+        <Style.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="Background" Value="{DynamicResource ThemePanelBg}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Padding" Value="12,8"/>
+                <Setter Property="Width" Value="85"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{DynamicResource WhiteOrBlack}"
+                                BorderThickness="1,1,1,1"
+                                CornerRadius="4,4,0,0" 
+                                    >  
+                                <ContentPresenter ContentSource="Header" 
+                          Margin="{TemplateBinding Padding}"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- 选中状态（最高优先级） -->
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource ThemeActive}"/>
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ThemeActive}"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <!-- 悬停状态（仅在未选中时生效） -->
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource ThemeHover}"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="ThemedDataGridStyle" TargetType="DataGrid">
+        <!-- 基础属性 -->
+        <Setter Property="RowHeight" Value="36"/>
+        <Setter Property="ColumnHeaderHeight" Value="32"/>
+        <Setter Property="Background" Value="{DynamicResource ThemePanelBg}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <!-- 奇数行 -->
+        <Setter Property="RowBackground" Value="{DynamicResource ThemeDataGridRow1}"/>
+        <!-- 偶数行 -->
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource ThemeDataGridRow2}"/>
+        <!-- 单元格样式:这里设置失效就去DataGridTextColumnStyle -->
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeSubText}"/>
+                    <Style.Triggers>
+                        <!-- 标准配色：选中行浅蓝背景+黑字（与黑/白不冲突） -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                            <Setter Property="Background" Value="#FFA9C6E8"/>
+                            <Setter Property="Foreground" Value="#FF1E1E1E"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <!-- 表头样式 -->
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="{DynamicResource ThemeDataGridHead}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="19"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeTextSecondary}"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="Padding" Value="6,0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- 表格中每个复选框的样式 -->
+    <Style x:Key="DataGridCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="CheckBoxBorder"
+                     Width="20" Height="20"
+                     Background="White"
+                     BorderBrush="Black"
+                     BorderThickness="2"
+                     CornerRadius="3"
+                     VerticalAlignment="Center">
+                            <Path x:Name="CheckMark"
+                       Data="M0,5 L4,9 L9,0"
+                       Stroke="{DynamicResource ThemeActive}"
+                       StrokeThickness="2"
+                       Visibility="Collapsed"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="{DynamicResource ThemeActive}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- 表格中每个单元格的文本样式(优先级大于ThemedDataGridStyle.CellStyle) -->
+    <Style x:Key="DataGridTextColumnStyle" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <!-- <Setter Property="Foreground" Value="{DynamicResource ThemeText}"/>-->
+        <!--<Setter Property="Background" Value="Black"/>-->
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+    
+    
+
+</ResourceDictionary>

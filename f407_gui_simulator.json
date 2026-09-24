@@ -1,0 +1,17 @@
+{
+  "full_grab_dir": "",
+  "regrab_dir": "",
+  "poll_ms": 5,
+  "mode": "自动",
+  "io_init_mask": 1,
+  "auto_reply": {
+    "PING": true,
+    "G28回零": true,
+    "CLAMP": true,
+    "BLOCK": true,
+    "MOTOR": true,
+    "CAMERA3D": true,
+    "轴移动": true,
+    "OTHER": true
+  }
+}

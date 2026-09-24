@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="CommonStyles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ==================== 主题资源（供界面绑定） ==================== -->
+    <SolidColorBrush x:Key="ThemeBg" Color="#ffffff"/>
+    <SolidColorBrush x:Key="ThemeTitleBg" Color="#EEEEF2"/>
+    <SolidColorBrush x:Key="ThemePanelBg" Color="#fafafafa"/>
+    <SolidColorBrush x:Key="ThemePanel1Bg" Color="#efefef"/>
+
+    <SolidColorBrush x:Key="ThemeBorder" Color="#FFE0E0E0"/>
+    <SolidColorBrush x:Key="ThemeSubBorder" Color="#8b8b8b"/>
+    <SolidColorBrush x:Key="ThemeText" Color="#FF333333"/>
+    <SolidColorBrush x:Key="ThemeTextSecondary" Color="#FF666666"/>
+    <SolidColorBrush x:Key="ThemeSubText" Color="#FF8A8A8A"/>
+    <SolidColorBrush x:Key="ThemeHover" Color="#c0c0c0"/>
+    <SolidColorBrush x:Key="ThemeActive" Color="#16417C"/>
+    <SolidColorBrush x:Key="ThemeButton" Color="#f6f7f8"/>
+    <SolidColorBrush x:Key="ThemeBottomStatus" Color="#D1C4E9"/>
+    <SolidColorBrush x:Key="WhiteOrBlack" Color="#000000"/>
+
+    <SolidColorBrush x:Key="ThemeDataGridHead" Color="#e3e3e3"/>
+    <SolidColorBrush x:Key="ThemeDataGridRow1" Color="#efefef"/>
+    <SolidColorBrush x:Key="ThemeDataGridRow2" Color="#ffffff"/>
+    <!-- ==================== 背景渐变色 ==================== -->
+    <LinearGradientBrush x:Key="ThemeGradientBg" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#f0f0f0" Offset="0"/>
+        <GradientStop Color="#eeeeee" Offset="0.5"/>
+        <GradientStop Color="#f0f0f0" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BlueGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#FF007ACC" Offset="0"/>
+        <GradientStop Color="#FF005A9E" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- ==================== 阴影效果 ==================== -->
+    <DropShadowEffect x:Key="GlowEffect" Color="#FF007ACC" BlurRadius="10" ShadowDepth="0" Opacity="0.3"/>
+    <DropShadowEffect x:Key="CardShadow" Color="#FF000000" BlurRadius="10" ShadowDepth="2" Opacity="0.1"/>
+
+
+</ResourceDictionary>
